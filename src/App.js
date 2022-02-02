@@ -1,23 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import ProductItem from './components/ProductItem'
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 function App() {
+
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      const results = await axios.get('https://dummyjson.com/products');
+      
+      setProducts(results.data.products);
+      console.log(results.data.products);
+    }
+
+    getData();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="productContainer">      
+
+      { products.map(p => <ProductItem name={p.title} image={p.thumbnail} price={p.price}/>) }
+    
     </div>
   );
 }
