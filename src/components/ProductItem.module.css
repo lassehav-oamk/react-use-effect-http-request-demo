@@ -1,0 +1,10 @@
+.productItem {  
+  border: 1px solid black;
+  margin: 30px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 200px;
+}
